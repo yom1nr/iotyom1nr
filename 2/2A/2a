@@ -1,0 +1,46 @@
+$MOD51
+
+pLED_R	EQU	P3.6
+pLED_G	EQU	P3.7
+pData	EQU	P2.7
+pClock	EQU	P2.6
+pLatch	EQU	P2.5
+
+	ORG	0000H
+	LJMP	0100H
+
+	ORG	0100H
+	CLR	EA
+	MOV	SP,#3FH
+	CLR	pClock
+
+mLOOP:	SETB	pLED_R
+	CLR	pLED_G
+	MOV	A,#055H
+	LCALL	XSend
+	LCALL	xDelay
+
+	CLR	pLED_R
+	SETB	pLED_G
+	MOV	A,#0AAH
+	LCALL	XSend
+	LCALL	xDelay
+	LJMP	mLOOP
+
+xDelay:	MOV	B,#1
+_Dly01:	MOV	A,#200
+_Dly00:	DJNZ	Acc,_Dly00
+	DJNZ	B,_Dly01
+	RET
+	
+XSend:	MOV	R0,#8
+_Shift:	RLC	A
+	MOV	pData,C
+	CLR	pClock
+	SETB	pClock
+	DJNZ	R0,_Shift
+_Latch:	CLR	pLatch
+	SETB	pLatch
+	RET
+
+	END

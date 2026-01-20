@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<MCUProject Schema="67" Class="CMCUProject" Path="" PathAbs="" ProjectType="1">
+<ProjectFolders/>
+<ProjectFiles/>
+<BuildSettings>
+<MCUProjectBuildSettings Class="CMCUProjectBuildSettings" ToolGroupType="-1" IntermediatePath="&amp;ASC.\" IntermediatePathAbs="" OutputPath="&amp;ASC.\" OutputPathAbs="" TargetFileType="6" SimPath="&amp;ASC..\..\..\..\lab\New folder\ENG23_2072 -- Lab10 System BUS\21Shift_Output\" SimPathAbs="&amp;ASCD:\lab\New folder\ENG23_2072 -- Lab10 System BUS\21Shift_Output\" SimFile="&amp;ASCLab1021.hex" CodeLoadType="0"/>
+</BuildSettings>
+</MCUProject>
