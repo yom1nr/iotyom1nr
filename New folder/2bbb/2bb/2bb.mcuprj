@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<MCUProject Schema="67" Class="CMCUProject" Path="" PathAbs="" ProjectType="0">
+<ProjectFolders>
+<FolderItem>
+<MCUFolder Class="CMCUFolder" Path="&amp;ASC2\" PathAbs="&amp;ASCD:\IOT\New folder\2bbb\2bb\2\" Folder="&amp;ASC2">
+<Folders/>
+<Files/>
+</MCUFolder>
+</FolderItem>
+</ProjectFolders>
+<ProjectFiles/>
+<BuildSettings>
+<MCUProjectBuildSettings Class="CMCUProjectBuildSettings" ToolGroupType="0" IntermediatePath="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" IntermediatePathAbs="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" OutputPath="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" OutputPathAbs="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" TargetFileType="6" SimPath="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" SimPathAbs="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" SimFile="" CodeLoadType="0">
+<Assembler>
+<MCUToolSettings Class="CMCUToolSettings" ToolType="0" IntermediatePath="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" IntermediatePathAbs="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" OutputPath="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" OutputPathAbs="&amp;ASCC:\Users\asus\Documents\National Instruments\Circuit Design Suite 14.1\MCU Workspaces\2bbb\2bb\" TargetType="6" IncludeOptions="&amp;ASC$MOD52" PreFilenameOptions="" PostFilenameOptions="">
+<MCULibraries/>
+</MCUToolSettings>
+</Assembler>
+</MCUProjectBuildSettings>
+</BuildSettings>
+</MCUProject>

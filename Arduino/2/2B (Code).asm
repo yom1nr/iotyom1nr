@@ -1,0 +1,87 @@
+kDelay EQU 1 
+; if Run on board >> kDelay EQU 25 
+; if SimmulaƟ on >> kDelay EQU 1
+LF_SEG EQU P1.4 
+RG_SEG EQU P1.5 
+PT_SEG EQU P0 
+pLED_R EQU P3.6 
+pLED_G EQU P3.7 
+pLoad EQU P2.2 
+pClock EQU P2.1 
+pData EQU P2.0 
+Data_H EQU 20H 
+Data_L EQU 21H 
+ ORG 0000H 
+ JMP 0100H 
+ ORG 0100H 
+ CLR EA 
+ MOV SP,#3FH 
+ SETB pData 
+ CLR LF_SEG 
+ CLR RG_SEG 
+ 
+LOOP: CALL GET_16BitData 
+ CALL Display_DATA 
+ MOV R7,#10 
+_Wait0: MOV R6,#kDelay 
+_Wait1: CALL DELAY 
+ DJNZ R6,_Wait1 
+ DJNZ R7,_Wait0 
+ JMP LOOP 
+GET_16BitData: 
+ CLR pLoad 
+ SETB pLoad 
+ CALL _Get8B 
+ MOV Data_L,A 
+ CALL _Get8B 
+ MOV Data_H,A 
+ RET 
+ 
+_Get8B: MOV R0,#8 
+_LP00: MOV C,pData 
+ RRC A 
+ CLR pClock 
+ SETB pClock 
+ DJNZ R0,_LP00 
+ RET 
+Display_DATA: 
+ MOV A,#10H 
+ CALL _Send1Seg 
+ MOV A,Data_H 
+ CALL _Send2HEX 
+ MOV A,Data_L 
+ CALL _Send2HEX 
+ RET 
+_Send2HEX: 
+ PUSH Acc 
+ SWAP A 
+ CALL _Send1HEX 
+ POP Acc 
+_Send1HEX: 
+ ANL A,#0FH 
+_Send1Seg: 
+ PUSH DPH 
+ PUSH DPL 
+ MOV DPTR,#T_SEG 
+ MOVC A,@A+DPTR 
+ CPL A 
+ MOV PT_SEG,A 
+ POP DPL 
+ POP DPH 
+ MOV R7,#kDelay 
+_Wait2: CALL DELAY 
+ DJNZ R7,_Wait2 
+ MOV PT_SEG,#0FFH 
+ MOV R7,#kDelay 
+_Wait3: CALL DELAY 
+ DJNZ R7,_Wait3 
+ RET 
+T_SEG: DB 77H, 11H, 6DH, 5DH, 1BH, 5EH, 7EH, 15H ; Code 0123 4567 
+ DB 7FH, 5FH, 3FH, 7AH, 66H, 79H, 6EH, 2EH ; Code 89ab cdef 
+ DB 08H 
+Delay: MOV B,#kDelay 
+ MOV A,#250 
+_DLY00: DJNZ Acc,_DLY00 
+ DJNZ B,_DLY00 
+ RET 
+ END

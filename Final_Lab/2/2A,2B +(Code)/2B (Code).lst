@@ -1,0 +1,249 @@
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 1
+
+
+
+
+
+       MCS-51 Family Macro Assembler   A S E M - 5 1   V 1.3
+       =====================================================
+
+
+
+	Source File:	C:\Users\jirap\OneDrive\Desktop\test\2B (Code).asm
+	Object File:	C:\Users\jirap\OneDrive\Desktop\test\2B (Code).hex
+	List File:	C:\Users\jirap\OneDrive\Desktop\test\2B (Code).lst
+
+
+
+ Line  I  Addr  Code            Source
+
+    1:		N      0001	kDelay EQU 1
+    2:				; if Run on board >> kDelay EQU 25
+    3:				; if SimmulaƟ on >> kDelay EQU 1
+    4:		B      0094	LF_SEG EQU P1.4
+    5:		B      0095	RG_SEG EQU P1.5
+    6:		D      0080	PT_SEG EQU P0
+    7:		B      00B6	pLED_R EQU P3.6
+    8:		B      00B7	pLED_G EQU P3.7
+    9:		B      00A2	pLoad EQU P2.2
+   10:		B      00A1	pClock EQU P2.1
+   11:		B      00A0	pData EQU P2.0
+   12:		N      0020	Data_H EQU 20H
+   13:		N      0021	Data_L EQU 21H
+   14:		N      0000	 ORG 0000H
+   15:	  0000	21 00		 JMP 0100H
+   16:		N      0100	 ORG 0100H
+   17:	  0100	C2 AF		 CLR EA
+   18:	  0102	75 81 3F	 MOV SP,#3FH
+   19:	  0105	D2 A0		 SETB pData
+   20:	  0107	C2 94		 CLR LF_SEG
+   21:	  0109	C2 95		 CLR RG_SEG
+   22:
+   23:	  010B	12 01 1E	LOOP: CALL GET_16BitData
+   24:	  010E	12 01 39	 CALL Display_DATA
+   25:	  0111	7F 0A		 MOV R7,#10
+   26:	  0113	7E 01		_Wait0: MOV R6,#kDelay
+   27:	  0115	12 01 85	_Wait1: CALL DELAY
+   28:	  0118	DE FB		 DJNZ R6,_Wait1
+   29:	  011A	DF F7		 DJNZ R7,_Wait0
+   30:	  011C	80 ED		 JMP LOOP
+   31:	  011E			GET_16BitData:
+   32:	  011E	C2 A2		 CLR pLoad
+   33:	  0120	D2 A2		 SETB pLoad
+   34:	  0122	12 01 2D	 CALL _Get8B
+   35:	  0125	F5 21		 MOV Data_L,A
+   36:	  0127	12 01 2D	 CALL _Get8B
+   37:	  012A	F5 20		 MOV Data_H,A
+   38:	  012C	22		 RET
+   39:
+   40:	  012D	78 08		_Get8B: MOV R0,#8
+   41:	  012F	A2 A0		_LP00: MOV C,pData
+   42:	  0131	13		 RRC A
+   43:	  0132	C2 A1		 CLR pClock
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 2
+
+
+
+ Line  I  Addr  Code            Source
+
+   44:	  0134	D2 A1		 SETB pClock
+   45:	  0136	D8 F7		 DJNZ R0,_LP00
+   46:	  0138	22		 RET
+   47:	  0139			Display_DATA:
+   48:	  0139	74 10		 MOV A,#10H
+   49:	  013B	12 01 53	 CALL _Send1Seg
+   50:	  013E	E5 20		 MOV A,Data_H
+   51:	  0140	12 01 49	 CALL _Send2HEX
+   52:	  0143	E5 21		 MOV A,Data_L
+   53:	  0145	12 01 49	 CALL _Send2HEX
+   54:	  0148	22		 RET
+   55:	  0149			_Send2HEX:
+   56:	  0149	C0 E0		 PUSH Acc
+   57:	  014B	C4		 SWAP A
+   58:	  014C	12 01 51	 CALL _Send1HEX
+   59:	  014F	D0 E0		 POP Acc
+   60:	  0151			_Send1HEX:
+   61:	  0151	54 0F		 ANL A,#0FH
+   62:	  0153			_Send1Seg:
+   63:	  0153	C0 83		 PUSH DPH
+   64:	  0155	C0 82		 PUSH DPL
+   65:	  0157	90 01 74	 MOV DPTR,#T_SEG
+   66:	  015A	93		 MOVC A,@A+DPTR
+   67:	  015B	F4		 CPL A
+   68:	  015C	F5 80		 MOV PT_SEG,A
+   69:	  015E	D0 82		 POP DPL
+   70:	  0160	D0 83		 POP DPH
+   71:	  0162	7F 01		 MOV R7,#kDelay
+   72:	  0164	12 01 85	_Wait2: CALL DELAY
+   73:	  0167	DF FB		 DJNZ R7,_Wait2
+   74:	  0169	75 80 FF	 MOV PT_SEG,#0FFH
+   75:	  016C	7F 01		 MOV R7,#kDelay
+   76:	  016E	12 01 85	_Wait3: CALL DELAY
+   77:	  0171	DF FB		 DJNZ R7,_Wait3
+   78:	  0173	22		 RET
+   79:	  0174	77 11 6D 5D	T_SEG: DB 77H, 11H, 6DH, 5DH, 1BH, 5EH, 7EH, 15H ; Code 0123 4567
+	  0178	1B 5E 7E 15
+   80:	  017C	7F 5F 3F 7A	 DB 7FH, 5FH, 3FH, 7AH, 66H, 79H, 6EH, 2EH ; Code 89ab cdef
+	  0180	66 79 6E 2E
+   81:	  0184	08		 DB 08H
+   82:	  0185	75 F0 01	Delay: MOV B,#kDelay
+   83:	  0188	74 FA		 MOV A,#250
+   84:	  018A	D5 E0 FD	_DLY00: DJNZ Acc,_DLY00
+   85:	  018D	D5 F0 FA	 DJNZ B,_DLY00
+   86:	  0190	22		 RET
+   87:				 END
+
+
+
+
+
+                     register banks used:  ---
+
+                     no errors
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 3
+
+
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 4
+
+
+
+
+
+	       L I S T   O F   S Y M B O L S
+	       =============================
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+??ASEM_51			  NUMBER    8051
+??VERSION			  NUMBER    0130
+AC				  BIT	      D6
+ACC				  DATA	      E0
+B				  DATA	      F0
+CY				  BIT	      D7
+DATA_H				  NUMBER    0020	  12
+DATA_L				  NUMBER    0021	  13
+DELAY				  CODE	    0185	  82
+DISPLAY_DATA			  CODE	    0139	  47
+DPH				  DATA	      83
+DPL				  DATA	      82
+EA				  BIT	      AF
+ES				  BIT	      AC
+ET0				  BIT	      A9
+ET1				  BIT	      AB
+EX0				  BIT	      A8
+EX1				  BIT	      AA
+EXTI0				  CODE	    0003
+EXTI1				  CODE	    0013
+F0				  BIT	      D5
+GET_16BITDATA			  CODE	    011E	  31
+IE				  DATA	      A8
+IE0				  BIT	      89
+IE1				  BIT	      8B
+INT0				  BIT	      B2
+INT1				  BIT	      B3
+IP				  DATA	      B8
+IT0				  BIT	      88
+IT1				  BIT	      8A
+KDELAY				  NUMBER    0001	   1
+LF_SEG				  NUMBER    0094	   4
+LOOP				  CODE	    010B	  23
+OV				  BIT	      D2
+P				  BIT	      D0
+P0				  DATA	      80
+P1				  DATA	      90
+P2				  DATA	      A0
+P3				  DATA	      B0
+PCLOCK				  NUMBER    00A1	  10
+PCON				  DATA	      87
+PDATA				  NUMBER    00A0	  11
+PLED_G				  NUMBER    00B7	   8
+PLED_R				  NUMBER    00B6	   7
+PLOAD				  NUMBER    00A2	   9
+PS				  BIT	      BC
+PSW				  DATA	      D0
+PT0				  BIT	      B9
+PT1				  BIT	      BB
+PT_SEG				  NUMBER    0080	   6
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 5
+
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+PX0				  BIT	      B8
+PX1				  BIT	      BA
+RB8				  BIT	      9A
+RD				  BIT	      B7
+REN				  BIT	      9C
+RESET				  CODE	    0000
+RG_SEG				  NUMBER    0095	   5
+RI				  BIT	      98
+RS0				  BIT	      D3
+RS1				  BIT	      D4
+RXD				  BIT	      B0
+SBUF				  DATA	      99
+SCON				  DATA	      98
+SINT				  CODE	    0023
+SM0				  BIT	      9F
+SM1				  BIT	      9E
+SM2				  BIT	      9D
+SP				  DATA	      81
+T0				  BIT	      B4
+T1				  BIT	      B5
+TB8				  BIT	      9B
+TCON				  DATA	      88
+TF0				  BIT	      8D
+TF1				  BIT	      8F
+TH0				  DATA	      8C
+TH1				  DATA	      8D
+TI				  BIT	      99
+TIMER0				  CODE	    000B
+TIMER1				  CODE	    001B
+TL0				  DATA	      8A
+TL1				  DATA	      8B
+TMOD				  DATA	      89
+TR0				  BIT	      8C
+TR1				  BIT	      8E
+TXD				  BIT	      B1
+T_SEG				  CODE	    0174	  79
+WR				  BIT	      B6
+_DLY00				  CODE	    018A	  84
+_GET8B				  CODE	    012D	  40
+_LP00				  CODE	    012F	  41
+_SEND1HEX			  CODE	    0151	  60
+_SEND1SEG			  CODE	    0153	  62
+_SEND2HEX			  CODE	    0149	  55
+_WAIT0				  CODE	    0113	  26
+_WAIT1				  CODE	    0115	  27
+_WAIT2				  CODE	    0164	  72
+_WAIT3				  CODE	    016E	  76

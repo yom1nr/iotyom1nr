@@ -1,0 +1,38 @@
+#include <MD_MAX72xx.h>
+#include <SPI.h>
+
+// ขาเชื่อมต่อ: CS=5, DIN=23, CLK=18
+#define HARDWARE_TYPE MD_MAX72XX::FC16_HW 
+#define MAX_DEVICES 1
+#define CS_PIN    5 
+#define DATA_PIN  23 
+#define CLK_PIN   18 
+
+MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES);
+
+// รูปลูกศรชี้ขึ้น (Up Arrow)
+uint8_t arrowUp[8] = {
+  0b00001000, //      XX      (หัวลูกศร)
+  0b00011100, //     XXXX
+  0b00111110, //    XXXXXX
+  0b01111111, //   XXXXXXXX
+  0b00011100, //      XX      (ก้านลูกศร)
+  0b00011100, //      XX
+  0b00011100, //      XX
+  0b00011100  //      XX
+};
+
+void setup() {
+  mx.begin();
+  mx.control(MD_MAX72XX::INTENSITY, 5); // ปรับความสว่าง
+  mx.clear();
+
+  // แสดงผลรูปลูกศร
+  for (int i = 0; i < 8; i++) {
+    mx.setRow(0, i, arrowUp[i]);
+  }
+}
+
+void loop() {
+  // แสดงค้างไว้ตลอด
+}

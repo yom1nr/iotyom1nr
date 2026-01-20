@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<MCUWorkspace Schema="67" Class="CMCUWorkspace" Path="" PathAbs="" MCUType="2" ActiveProjectIndex="1">
+<MCUProjects>
+<ProjectItem ProjectPath="&amp;ASC2bb\2bb.mcuprj" ProjectPathAbs="&amp;ASCD:\IOT\New folder\2bbb\2bb\2bb.mcuprj"/>
+<ProjectItem ProjectPath="&amp;ASC22\22.mcuprj" ProjectPathAbs="&amp;ASCD:\IOT\New folder\2bbb\22\22.mcuprj"/>
+</MCUProjects>
+</MCUWorkspace>

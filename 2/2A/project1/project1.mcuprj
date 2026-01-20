@@ -3,6 +3,6 @@
 <ProjectFolders/>
 <ProjectFiles/>
 <BuildSettings>
-<MCUProjectBuildSettings Class="CMCUProjectBuildSettings" ToolGroupType="-1" IntermediatePath="&amp;ASC.\" IntermediatePathAbs="" OutputPath="&amp;ASC.\" OutputPathAbs="" TargetFileType="6" SimPath="&amp;ASC..\..\..\..\lab\New folder\ENG23_2072 -- Lab10 System BUS\21Shift_Output\" SimPathAbs="&amp;ASCD:\lab\New folder\ENG23_2072 -- Lab10 System BUS\21Shift_Output\" SimFile="&amp;ASCLab1021.hex" CodeLoadType="0"/>
+<MCUProjectBuildSettings Class="CMCUProjectBuildSettings" ToolGroupType="-1" IntermediatePath="&amp;ASC.\" IntermediatePathAbs="&amp;ASCD:\IOT\2\2A\project1\" OutputPath="&amp;ASC.\" OutputPathAbs="&amp;ASCD:\IOT\2\2A\project1\" TargetFileType="6" SimPath="&amp;ASCC:\Users\asus\Pictures\" SimPathAbs="&amp;ASCC:\Users\asus\Pictures\" SimFile="&amp;ASClab2a.hex" CodeLoadType="0"/>
 </BuildSettings>
 </MCUProject>
