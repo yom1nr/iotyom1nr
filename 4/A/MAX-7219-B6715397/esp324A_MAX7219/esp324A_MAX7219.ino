@@ -13,10 +13,10 @@ void loop()
 { lc.setChar(0, 7, 'B', false);
 lc.setDigit(0, 6, 6, false);
 lc.setDigit(0, 5, 7, false);
-lc.setDigit(0, 4, 0, false);
-lc.setDigit(0, 3, 8, false);
-lc.setDigit(0, 2, 9, false);
-lc.setDigit(0, 1, 6, false);
-lc.setDigit(0, 0, 2, false);
+lc.setDigit(0, 4, 2, false);
+lc.setDigit(0, 3, 9, false);
+lc.setDigit(0, 2, 8, false);
+lc.setDigit(0, 1, 7, false);
+lc.setDigit(0, 0, 5, false);
 delay(1000);
 }
